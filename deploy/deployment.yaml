@@ -28,7 +28,7 @@ spec:
 
       containers:
       - name: api-client-ip
-        image: "francoisaster/api-client-ip:d7792c8765b2671b35b6ce6cd23eeeffadc146d7"
+        image: "$DOCKER_IMAGE"
         imagePullPolicy: Always
         command: ["dumb-init", "--"]
         args: ["node", "index.js"]
