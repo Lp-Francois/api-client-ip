@@ -32,7 +32,6 @@ jobs:
         with:
           builder: ${{ steps.buildx.outputs.name }}
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/api-client-ip:$(date +%s)
             ${{ secrets.DOCKERHUB_USERNAME }}/api-client-ip:${{ github.sha }}
             ${{ secrets.DOCKERHUB_USERNAME }}/api-client-ip:latest
           context: .
