@@ -68,6 +68,7 @@ metadata:
 spec:
   entryPoints:
     - websecure
+    - web
   routes:
   - match: Host(`$HOST_INGRESS`)
     kind: Rule
