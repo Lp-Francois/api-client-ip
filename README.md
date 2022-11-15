@@ -20,4 +20,7 @@ export DOCKER_IMAGE=francoisaster/api-client-ip:d7792c8765b2671b35b6ce6cd23eeeff
 
 envsubst < deploy/deployment.yaml > deploy/output.yaml   
 kubectl apply -f deploy/output.yaml
+
+# on mac
+open https://$HOST_INGRESS/ip
 ```
