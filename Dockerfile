@@ -3,7 +3,6 @@ FROM node:21-alpine3.18
 
 RUN apk add --no-cache openssl dumb-init
 
-RUN mkdir /usr/src/app && chown -R node:node /usr/src/app
 WORKDIR /usr/src/app
 
 ENV NODE_ENV production
