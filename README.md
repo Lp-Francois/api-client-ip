@@ -14,7 +14,7 @@ envsubst < deploy/deployment.yaml > deploy/output.yaml
 kubectl apply -f deploy/output.yaml
 
 # on mac
-open https://$HOST_INGRESS/ip
+open http://$HOST_INGRESS/ip
 ```
 
 On the `/ip` endpoint, basic client information are diplayed allowing you to debug IP forwarding.
