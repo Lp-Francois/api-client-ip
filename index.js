@@ -1,11 +1,27 @@
 const express = require('express')
 const app = express()
 const port = 3000
+const { setTimeout: sleep } = require("node:timers/promises");
 
-app.get('/', (req, res) => {
-  console.log('request received on /')
-  res.send({ healthy: true })
-})
+console.log("Hello there!");
+
+app.get("/", (req, res) => {
+  console.log("request received on /");
+  res.send({ healthy: true });
+});
+
+const SLEEP_SECONDS = process.env.SLEEP_SECONDS;
+console.log(`SLEEP_SECONDS: ${SLEEP_SECONDS}`);
+
+app.get("/timeout", async (req, res) => {
+  console.log("request received on /timeout");
+  if (SLEEP_SECONDS) {
+    console.log(`sleeping for ${SLEEP_SECONDS} seconds`);
+    await sleep(SLEEP_SECONDS * 1000);
+    console.log("done");
+  }
+  res.send({ healthy: true });
+});
 
 app.set('trust proxy', true)
 

@@ -2,37 +2,32 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: api-client-ip
-
   labels:
     app: api-client-ip
-
 spec:
   strategy:
     rollingUpdate:
       maxUnavailable: 0
     type: RollingUpdate
-
   replicas: 1
-
   selector:
     matchLabels:
       app: api-client-ip
-
   template:
     metadata:
       labels:
         app: api-client-ip
-
     spec:
       terminationGracePeriodSeconds: 30
-
       containers:
       - name: api-client-ip
         image: "$DOCKER_IMAGE"
         imagePullPolicy: Always
         command: ["dumb-init", "--"]
         args: ["node", "index.js"]
-
+        env:
+        - name: SLEEP_SECONDS
+          value: "60"
         ports:
           - name: http
             containerPort: 3000

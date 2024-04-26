@@ -1,22 +1,21 @@
-FROM node:16.17.1-slim as base
 
-ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_x86_64 /usr/local/bin/dumb-init
-RUN chmod +x /usr/local/bin/dumb-init
-ENTRYPOINT ["dumb-init", "--"]
+FROM node:21-alpine3.18
 
-RUN mkdir /usr/app && chown -R node:node /usr/app
-WORKDIR /usr/app
+RUN apk add --no-cache openssl dumb-init
 
-USER node 
+RUN mkdir /usr/src/app && chown -R node:node /usr/src/app
+WORKDIR /usr/src/app
 
-ENV NODE_ENV=production
+ENV NODE_ENV production
 
 COPY --chown=node:node package*.json ./
 
-RUN npm ci --only=production
+RUN npm ci --only=production && npm cache clean --force
 
 COPY --chown=node:node . .
 
+USER node
 EXPOSE 3000
 
-CMD ["node", "index.js"]
+ENTRYPOINT ["dumb-init", "--"]
+CMD ["node", "idex.js"]
