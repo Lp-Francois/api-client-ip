@@ -13,11 +13,17 @@ app.get("/", (req, res) => {
 const SLEEP_SECONDS = process.env.SLEEP_SECONDS;
 console.log(`SLEEP_SECONDS: ${SLEEP_SECONDS}`);
 
+/**
+ * To test timeout from load balancers
+ */
 app.get("/timeout", async (req, res) => {
-  console.log("request received on /timeout");
-  if (SLEEP_SECONDS) {
-    console.log(`sleeping for ${SLEEP_SECONDS} seconds`);
-    await sleep(SLEEP_SECONDS * 1000);
+  console.log(`request received on ${req.url}`);
+
+  let sleepSec = Number(req.query.sleep ?? SLEEP_SECONDS);
+
+  if (sleepSec) {
+    console.log(`sleeping for ${sleepSec} seconds`);
+    await sleep(sleepSec * 1000);
     console.log("done");
   }
   res.send({ healthy: true });

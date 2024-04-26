@@ -2,7 +2,7 @@
 
 API to debug the client IP forwarding through load-balancers, ingress, etc. Very useful to check if the client IP is passed in order to achieve _rate-limiting_ with your application.
 
-It can also debug timeout, with passing the `SLEEP_SECONDS` environment variable. Ping `/timeout` endpoint to simulate a long request.
+It can also debug timeout, ping `/timeout?sleep=120` endpoint to simulate a long request.
 
 ## Getting started - Deploy on K8s
 
